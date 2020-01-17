@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="js/vendor/webfont.js"></script>
+    <script src="js/vendor/snap.svg-min.js"></script>
+    <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/vendor/sequence-diagram-min.js"></script>
+  </head>
+  <body>
+    <h1>Waiting</h1>
+    <form>
+      <label
+        >File:
+        <select name="file">
+          <option>formscript.js</option>
+          <option>main.js</option>
+          <option>mockapi.js</option>
+          <option>script.js</option>
+        </select>
+      </label>
+      <label
+        >Style:
+        <select name="style">
+          <option>simple</option>
+          <option>hand</option>
+        </select></label
+      >
+    </form>
+    <div id="diagram"></div>
+    <script>
+      //  var diagram = Diagram.parse("A->B: Message");
+      //  diagram.drawSVG("diagram", { theme: "hand" });
+    </script>
+
+    <script src="js/parser.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        setStyle("simple");
+        fetchData("formscript.js");
+        init();
+      });
+      function init() {
+        const form = document.querySelector("form");
+        form.elements.file.addEventListener("change", e => {
+          console.log(e.target.value);
+          fetchData(e.target.value);
+        });
+        form.elements.style.addEventListener("change", e => {
+          console.log(e.target.value);
+          setStyle(e.target.value);
+        });
+      }
+    </script>
+  </body>
+</html>
