@@ -13,10 +13,11 @@
   <body>
     <h1>Waiting</h1>
     <form>
+        
       <label
         >File:
         <select name="file">
-          <option>formscript.js</option>
+          <option selected>formscript.js</option>
           <option>main.js</option>
           <option>mockapi.js</option>
           <option>script.js</option>
@@ -25,7 +26,7 @@
       <label
         >Style:
         <select name="style">
-          <option>simple</option>
+          <option selected>simple</option selected>
           <option>hand</option>
         </select></label
       >
@@ -38,20 +39,22 @@
 
     <script src="js/parser.js"></script>
     <script>
+      let DC;
       window.addEventListener("load", () => {
-        setStyle("simple");
-        fetchData("formscript.js");
+        DC = new DiagramCreator("diagram", "formscript.js", "simple");
         init();
       });
       function init() {
         const form = document.querySelector("form");
         form.elements.file.addEventListener("change", e => {
           console.log(e.target.value);
-          fetchData(e.target.value);
+          DC.setPath(e.target.value);
+          //fetchData(e.target.value);
         });
         form.elements.style.addEventListener("change", e => {
           console.log(e.target.value);
-          setStyle(e.target.value);
+          DC.setTheme(e.target.value);
+          //setStyle(e.target.value);
         });
       }
     </script>
