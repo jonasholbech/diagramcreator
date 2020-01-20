@@ -9,8 +9,38 @@
     <script src="js/vendor/snap.svg-min.js"></script>
     <script src="js/vendor/underscore-min.js"></script>
     <script src="js/vendor/sequence-diagram-min.js"></script>
+    <style>
+        header {
+            background:royalblue;
+            color:white;
+            padding:2rem;
+            position:absolute;
+            width:100vw;
+            top:0;
+            left:0;
+        }
+    </style>
+    <script>
+        window.addEventListener("load",()=>{
+            const header = document.querySelector("header");
+            if(localStorage.getItem("instructions")){
+                header.remove();
+            } else {
+                header.querySelector("button").addEventListener("click", e=>{
+                    localStorage.setItem("instructions", true);
+                    header.remove();
+                })
+            }
+        })
+    </script>
   </head>
   <body>
+      <header>
+          <h1>Instructions</h1>
+          <p>Enter "simple" JS in the textarea to generate a diagram, or select a file from the dropdown</p>
+          <p>You can select a theme by changing the style (the "hand" theme works, it's just really slow)</p>
+          <button>Got it!</button>
+      </header>
     <h1>Waiting</h1>
     <form>
         <label><textarea name="direct"></textarea></label>
