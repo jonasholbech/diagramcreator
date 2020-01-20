@@ -1,10 +1,10 @@
 //https://github.com/bramp/js-sequence-diagrams/blob/master/README.md
 class DiagramCreator {
-  constructor(selector, path = "", theme = "simple") {
+  constructor(selector, theme = "simple") {
     this.selector = selector;
     this.parseData = this.parseData.bind(this);
     this.setTheme(theme);
-    this.setPath(path);
+    //this.setPath(path);
   }
   fetchData() {
     document.querySelector("#" + this.selector).innerHTML = "Loading";
@@ -51,7 +51,7 @@ class DiagramCreator {
       }
       const func = {
         name: match[1],
-        arguments: match[2].split(","),
+        arguments: match[2].split(","), //arguments er ikke helt ringtige, det her er hvad funktionen forventer, men i overview skal det nok være hvad der bliver sendt rundt
         functionDefinition: functionAsString,
         calls: []
       };
@@ -85,6 +85,11 @@ class DiagramCreator {
             `${func.name}->${call}: ${func.arguments.join(", ")}`
           );
         });
+      }
+      if (func.arguments.length > 0) {
+        diagramData.push(
+          `Note over ${func.name}: ${func.arguments.join(", ")}`
+        );
       }
     });
     document.querySelector("#" + this.selector).innerHTML = "";
